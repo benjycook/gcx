@@ -53,6 +53,7 @@ export interface DeployerOptions extends GoogleAuthOptions {
   entryPoint?: string;
   project?: string;
   targetDir?: string;
+  environmentVariables?: any;
 }
 
 /**
@@ -166,6 +167,7 @@ export class Deployer extends GCXClient {
     if (opts.maxInstances) fields.push('maxInstances');
     if (opts.vpcConnector) fields.push('vpcConnector');
     if (opts.network) fields.push('network');
+    if (opts.environmentVariables) fields.push('environmentVariables')
     if (opts.runtime) fields.push('runtime');
     if (opts.timeout) fields.push('timeout');
     if (opts.triggerHTTP) fields.push('httpsTrigger');
@@ -212,6 +214,7 @@ export class Deployer extends GCXClient {
       availableMemoryMb: this._options.memory,
       maxInstances: this._options.maxInstances,
       vpcConnector: this._options.vpcConnector,
+      environmentVariables: this._options.environmentVariables
     };
     if (this._options.triggerTopic) {
       requestBody.eventTrigger = {
